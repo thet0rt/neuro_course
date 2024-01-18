@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import Literal
+import datetime as dt
 
 app = FastAPI()
 
@@ -18,6 +19,12 @@ class OpeningHours(BaseModel):
     friday: list[Type] | None
     saturday: list[Type] | None
     sunday: list[Type] | None
+
+
+def get_time(unix_time: int) -> str:
+    time = dt.datetime.fromtimestamp(unix_time, dt.timezone.utc)
+    return time.strftime("%I:%M %p")
+
 
 
 @app.post('/opening_hours')
