@@ -1,7 +1,6 @@
-import pytest
 from fastapi.exceptions import HTTPException
 from pytest import raises
-from .methods import (
+from methods import (
     sort_opening_hours,
     get_the_day_before,
     get_time,
