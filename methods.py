@@ -5,7 +5,6 @@ from fastapi import HTTPException
 
 def get_time(unix_time: int) -> str:
     time = dt.datetime.fromtimestamp(unix_time, dt.timezone.utc)
-    a = time.strftime("%I:%M %p")
     return time.strftime("%I:%M %p")
 
 
@@ -24,6 +23,12 @@ def get_the_day_before(current_day):
 
 
 def sort_opening_hours(opening_hours: dict) -> dict:
+    """
+    Сортирует списки словарей по параметру value
+    (по времени)
+    :param opening_hours: dict
+    :return: dict
+    """
     opening_hours_sorted = {}
     for day, time in opening_hours.items():
         opening_hours_sorted[day] = (
@@ -33,6 +38,11 @@ def sort_opening_hours(opening_hours: dict) -> dict:
 
 
 def fix_next_day_closure(opening_hours: dict) -> None:
+    """
+    Переносит закрытие следующим днем в день открытия
+    :param opening_hours: dict
+    :return: dict
+    """
     for day, time_period in opening_hours.items():
         if not time_period:
             continue

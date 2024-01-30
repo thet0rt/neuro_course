@@ -1,9 +1,14 @@
 import uvicorn
 from fastapi import FastAPI
 
-from fastapi import Response
+from fastapi.responses import PlainTextResponse
 
-from methods import sort_opening_hours, fix_next_day_closure, divide_into_pairs, get_schedule
+from methods import (
+    sort_opening_hours,
+    fix_next_day_closure,
+    divide_into_pairs,
+    get_schedule,
+)
 from models import OpeningHours
 
 app = FastAPI()
@@ -15,7 +20,7 @@ async def add_opening_hours(opening_hours: OpeningHours):
     fix_next_day_closure(opening_hours_sorted)
     divide_into_pairs(opening_hours_sorted)
     message = get_schedule(opening_hours_sorted)
-    return Response(content=message)
+    return PlainTextResponse(content=message)
 
 
 if __name__ == "__main__":
