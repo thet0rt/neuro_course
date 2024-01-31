@@ -1,0 +1,6 @@
+version: "3.3"
+services:
+  api:
+    image: thet0rt/hw-1:1.0.0
+    ports:
+      - 8005:80
